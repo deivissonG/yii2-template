@@ -1,7 +1,7 @@
 {
-    "name": "yiisoft/yii2-app-basic",
-    "description": "Yii 2 Basic Project Template",
-    "keywords": ["yii2", "framework", "basic", "project template"],
+    "name": "deivissong/yii2-template",
+    "description": "Yii2 Template",
+    "keywords": ["yii2", "framework", "basic", "project template", "starter"],
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
@@ -14,10 +14,10 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.4.0",
         "yiisoft/yii2": "~2.0.14",
-        "yiisoft/yii2-bootstrap4": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0"
+        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
+        "vlucas/phpdotenv": "v5.4.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

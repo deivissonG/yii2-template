@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+
+// Application Name
+$appName = readline("What is the name of your application? (Yii2-template) ");
+
+if (!$appName) {
+    $appName = "Yii2-template";
+}
+
+echo "Extracting db environment file...";
+$dbEnvFileName = '.env-db';
+if (!file_exists($dbEnvFileName)) {
+    copy('.env-db-example', $dbEnvFileName);
+    echo " done!\n";
+}
+
+$appEnvFileName = '.env-app';
+if (!file_exists($appEnvFileName)) {
+    echo "Generating Cookie Validation Key... ";
+    $length = 32;
+    $bytes = openssl_random_pseudo_bytes($length);
+    $key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
+    echo " done!\n";
+
+    echo "Extracting app environment file...";
+    copy('.env-app-example', $appEnvFileName);
+
+    $content = preg_replace('/(\nCOOKIE_VALIDATION_KEY=)(\s*)/', "\\1$key\n", file_get_contents($appEnvFileName));
+    $content = preg_replace('/(\nNAME=)(\s*)/', "\\1$appName\n", $content);
+
+    file_put_contents($appEnvFileName, $content);
+
+    echo " done!\n";
+}
