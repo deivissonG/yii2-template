@@ -1,9 +1,31 @@
-version: '2'
+version: '3.5'
 services:
-  php:
-    image: yiisoftware/yii2-php:7.4-apache
+  db:
+    container_name: template_db
+    image: mysql:latest
+    restart: unless-stopped
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
+      - /var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password --max_connections=1024
+    env_file:
+      - .env-db
+
+  app:
+    container_name: template_app
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - db
     ports:
-      - '8000:80'
+      - '8080:80'
+      - '8081:443'
+    volumes:
+      - ./.:/app
+    tmpfs:
+      - /app/runtime
+      - /app/web/assets
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    env_file:
+      - .env-app
+    command: bash -c "composer install && php yii migrate --interactive=0 && supervisord -c /etc/supervisor/supervisord.conf"
