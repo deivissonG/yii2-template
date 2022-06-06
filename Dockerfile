@@ -4,7 +4,7 @@ ENV TZ=America/Sao_Paulo
 
 RUN apt-get update -y
 RUN apt-get upgrade -y
-RUN apt-get install -y --no-install-recommends libc-client-dev libkrb5-dev unzip
+RUN apt-get install -y --no-install-recommends libkrb5-dev unzip
 
 
 RUN curl -OL https://github.com/composer-unused/composer-unused/releases/download/0.7.12/composer-unused.phar
