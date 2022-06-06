@@ -5,7 +5,6 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
-use app\widgets\Sidebar;
 use kartik\icons\Icon;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
